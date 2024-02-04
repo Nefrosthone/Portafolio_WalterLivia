@@ -1,0 +1,72 @@
+-- Creando la base de datos
+CREATE DATABASE IF NOT EXISTS bd_sistema_ventas;
+
+-- Usar la base de datos
+USE bd_sistema_ventas;
+
+-- Crear tabla usuarios
+CREATE TABLE IF NOT EXISTS tb_usuario (
+    idUsuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    usuario VARCHAR(15) NOT NULL,
+    password VARCHAR(15) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    estado INT NOT NULL
+);
+
+-- Crear tabla cliente
+CREATE TABLE IF NOT EXISTS tb_cliente (
+    idCliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    cedula VARCHAR(15) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    estado INT NOT NULL
+);
+
+-- Crear tabla categoria
+CREATE TABLE IF NOT EXISTS tb_categoria (
+    idCategoria INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(200) NOT NULL,
+    estado INT NOT NULL
+);
+
+-- Crear tabla producto
+CREATE TABLE IF NOT EXISTS tb_producto (
+    idProducto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    cantidad INT NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    descripcion VARCHAR(200) NOT NULL,
+    porcentajeIva INT NOT NULL,
+    idCategoria INT NOT NULL,
+    estado INT NOT NULL
+);
+
+-- Crear tabla cabecera de venta
+CREATE TABLE IF NOT EXISTS tb_cabecera_venta (
+    idCabeceraVenta INT AUTO_INCREMENT PRIMARY KEY,
+    idCliente INT NOT NULL,
+    valorPagar DECIMAL(10,2) NOT NULL,
+    fechaVenta DATE NOT NULL,
+    estado INT NOT NULL
+);
+
+-- Crear tabla detalle de venta
+CREATE TABLE IF NOT EXISTS tb_detalle_venta (
+    idDetalleVenta INT AUTO_INCREMENT PRIMARY KEY,
+    idCabeceraVenta INT NOT NULL,
+    idProducto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precioUnitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    descuento DECIMAL(10,2) NOT NULL,
+    iva DECIMAL(10,2) NOT NULL,
+    totalPagar DECIMAL(10,2) NOT NULL,
+    estado INT NOT NULL
+);
+
+-- Mostrar todas las tablas de la base de datos
+SHOW TABLES;
